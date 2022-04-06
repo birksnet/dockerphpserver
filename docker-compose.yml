@@ -1,0 +1,19 @@
+version: "3" 
+services:
+
+    web:
+        image: nginx
+        ports:
+          - "80:80"
+        links:
+          - fpm
+
+        volumes:
+          - "./app/nginx/:/etc/nginx/conf.d/"
+          - "./app/php/public/static/:/var/www/html/public/static/"
+    fpm:
+        image: php:7.4-fpm
+        tty: true
+        volumes:
+          - "./app/php/:/var/www/html/"
+  
